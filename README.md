@@ -1,4 +1,4 @@
-# React Native Weather App
+# Apple Weather App
 
 Figma file: [App Design](https://www.figma.com/community/file/1100826294536456295/weather-app-ui-design)
 
