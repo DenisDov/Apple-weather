@@ -3,7 +3,7 @@ import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Canvas, LinearGradient, RoundedRect, Shadow, vec } from "@shopify/react-native-skia";
 import { Text, View, StyleSheet, Pressable, TextInput, ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackgroundGradient from "@/components/BackgroundGradient";
 import WeatherWidget from "@/components/WeatherWidget";
@@ -11,14 +11,13 @@ import useApplicationDimensions from "@/hooks/useApplicationDimensions";
 import { ForecastList } from "@/lib/data/ForecastData";
 
 export default function WeatherList() {
-  const { top } = useSafeAreaInsets();
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const { width } = useApplicationDimensions();
   return (
     <>
       <BackgroundGradient />
       {/* Header */}
-      <View style={[styles.container, { paddingTop: top }]}>
+      <SafeAreaView edges={["top"]} style={styles.container}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Pressable onPress={() => navigation.goBack()}>
@@ -54,7 +53,7 @@ export default function WeatherList() {
             <WeatherWidget forecast={forecast} key={i} />
           ))}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </>
   );
 }
