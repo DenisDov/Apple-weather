@@ -13,31 +13,24 @@ import { ForecastList } from "@/lib/data/ForecastData";
 export default function WeatherList() {
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const { width, height } = useApplicationDimensions();
+  const { width } = useApplicationDimensions();
   return (
     <>
       <BackgroundGradient />
       {/* Header */}
-      <View style={{ paddingTop: top + 2, flex: 1 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: 16,
-            paddingBottom: 8,
-          }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={[styles.container, { paddingTop: top }]}>
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
             <Pressable onPress={() => navigation.goBack()}>
-              <Ionicons name="chevron-back-sharp" size={34} color="rgba(235,235,245,.6)" />
+              <Ionicons name="chevron-back-sharp" size={34} color="rgba(235, 235, 246, 0.6)" />
             </Pressable>
             <Text style={styles.titleText}>Weather</Text>
           </View>
           <Ionicons name="ellipsis-horizontal-circle" size={34} color="white" />
         </View>
         {/* Searchbar */}
-        <View style={{ marginHorizontal: 16, borderRadius: 10, height: 36 }}>
-          <Canvas style={{ ...StyleSheet.absoluteFillObject }}>
+        <View style={styles.searchbar}>
+          <Canvas style={StyleSheet.absoluteFill}>
             <RoundedRect x={0} y={0} width={width - 32} height={36} r={10}>
               <LinearGradient
                 start={vec(0, 0)}
@@ -47,13 +40,7 @@ export default function WeatherList() {
               <Shadow dx={0} dy={4} blur={4} color="rgba(0,0,0,1)" inner />
             </RoundedRect>
           </Canvas>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              paddingHorizontal: 8,
-            }}>
+          <View style={styles.searchbarContent}>
             <Feather name="search" size={17} color="rgba(235,235,246,0.6)" />
             <TextInput
               placeholder="Search for a city or airport"
@@ -62,13 +49,7 @@ export default function WeatherList() {
             />
           </View>
         </View>
-        <ScrollView
-          style={{ flex: 1, paddingTop: 20 }}
-          contentContainerStyle={{
-            alignItems: "center",
-            gap: 20,
-            paddingBottom: 100,
-          }}>
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
           {ForecastList.map((forecast, i) => (
             <WeatherWidget forecast={forecast} key={i} />
           ))}
@@ -79,6 +60,40 @@ export default function WeatherList() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingBottom: 8,
+  },
+  headerLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchbar: {
+    marginHorizontal: 16,
+    borderRadius: 10,
+    height: 36,
+  },
+  searchbarContent: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 8,
+  },
+  scrollView: {
+    flex: 1,
+    paddingTop: 20,
+  },
+  scrollViewContent: {
+    alignItems: "center",
+    gap: 20,
+    paddingBottom: 100,
+  },
   titleText: {
     color: "white",
     fontFamily: "SF-Semibold",
@@ -88,7 +103,6 @@ const styles = StyleSheet.create({
     color: "rgba(235,235,246,0.5)",
     fontFamily: "SF-Regular",
     fontSize: 17,
-    // lineHeight: 22,
     paddingLeft: 10,
   },
 });
