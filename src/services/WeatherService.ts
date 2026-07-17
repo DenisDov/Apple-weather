@@ -19,7 +19,7 @@ export class WeatherService {
   private nwsUrl: string;
   private city: string = "";
   private state: string = "";
-  private API_KEY: string = "LRDpT3wwM67E1R33oyMFa18RYpLKr8rQ";
+  private API_KEY: string = process.env.EXPO_PUBLIC_WEATHER_API_KEY ?? "";
   constructor(lat: number, lng: number) {
     this.baseUrl = `https://api.tomorrow.io/v4/weather/forecast?apikey=${this.API_KEY}&location=${lat},${lng}&units=metric&timesteps=1d&timesteps=1h`;
     this.nwsUrl = `https://api.weather.gov/points/${lat},${lng}`;

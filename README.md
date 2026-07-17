@@ -51,7 +51,11 @@ cd weather-app
 npm install
 ```
 
-Set your Tomorrow.io API key in `src/services/WeatherService.ts`.
+Create a `.env.local` file in the project root with your Tomorrow.io API key:
+
+```bash
+EXPO_PUBLIC_WEATHER_API_KEY=your-api-key
+```
 
 ### Running
 
