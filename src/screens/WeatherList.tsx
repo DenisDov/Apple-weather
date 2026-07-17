@@ -21,11 +21,11 @@ export default function WeatherList() {
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Pressable onPress={() => navigation.goBack()}>
-              <Ionicons name="chevron-back-sharp" size={34} color="rgba(235,235,245,.6)" />
+              <Ionicons name="chevron-back-sharp" size={34} color={Colors.secondaryLabel} />
             </Pressable>
             <Text style={styles.titleText}>Weather</Text>
           </View>
-          <Ionicons name="ellipsis-horizontal-circle" size={34} color="white" />
+          <Ionicons name="ellipsis-horizontal-circle" size={34} color={Colors.label} />
         </View>
         {/* Searchbar */}
         <View style={styles.searchbar}>
@@ -34,16 +34,16 @@ export default function WeatherList() {
               <LinearGradient
                 start={vec(0, 0)}
                 end={vec(width - 32, 36)}
-                colors={["rgba(46,51,90,0.26)", "rgba(28,27,51, 0.26)"]}
+                colors={Colors.searchbarGradient}
               />
-              <Shadow dx={0} dy={4} blur={4} color="rgba(0,0,0,1)" inner />
+              <Shadow dx={0} dy={4} blur={4} color={Colors.searchbarShadow} inner />
             </RoundedRect>
           </Canvas>
           <View style={styles.searchInputRow}>
-            <Feather name="search" size={17} color="rgba(235,235,246,0.6)" />
+            <Feather name="search" size={17} color={Colors.secondaryLabel} />
             <TextInput
               placeholder="Search for a city or airport"
-              placeholderTextColor="rgba(235,235,246,0.6)"
+              placeholderTextColor={Colors.secondaryLabel}
               style={styles.searchInput}
             />
           </View>
@@ -57,6 +57,14 @@ export default function WeatherList() {
     </>
   );
 }
+
+const Colors = {
+  label: "white",
+  secondaryLabel: "rgba(235,235,245,0.6)",
+  searchText: "rgba(235,235,245,0.5)",
+  searchbarGradient: ["rgba(46,51,90,0.26)", "rgba(28,27,51,0.26)"],
+  searchbarShadow: "rgba(0,0,0,1)",
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -94,12 +102,12 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
   titleText: {
-    color: "white",
+    color: Colors.label,
     fontFamily: "SF-Semibold",
     fontSize: 28,
   },
   searchInput: {
-    color: "rgba(235,235,246,0.5)",
+    color: Colors.searchText,
     fontFamily: "SF-Regular",
     fontSize: 17,
     paddingLeft: 10,
